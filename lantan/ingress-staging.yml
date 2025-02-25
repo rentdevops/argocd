@@ -1,0 +1,113 @@
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: nginx-ingress-staging
+#   namespace: lantan
+#   annotations:
+#     nginx.ingress.kubernetes.io/whitelist-source-range: 0.0.0.0/0,::/0
+#     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+#     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+#     kubernetes.io/ingress.class: "nginx"
+#     # nginx.ingress.kubernetes.io/server-snippet: |
+#     #   # Custom NGINX configuration to handle SPA fallback
+#     #   location / {
+#     #     try_files $uri $uri/ /index.html;  # Serve index.html when file is not found
+#     #   }
+# spec:
+#   tls:
+#     - hosts:
+#         - staging.lantan.property
+#       secretName: latan-key
+#   rules:
+#     - host: staging.lantan.property
+#       http:
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: lantanfrontendsvc
+#                 port:
+#                   number: 80
+#   ingressClassName: nginx
+
+
+
+
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: nginx-ingress-staging
+#   namespace: lantan
+#   annotations:
+#     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+#     kubernetes.io/ingress.class: "nginx"
+#     nginx.ingress.kubernetes.io/server-snippet: |
+#       # Remove duplicate location block and use only one location /
+#       large_client_header_buffers 4 16k;  # Replaces http2_max_field_size and http2_max_header_size
+#       keepalive_requests 100;  # Replaces http2_max_requests
+
+#       location / {
+#         try_files $uri $uri/ /index.html;  # Your custom routing logic
+#       }
+# spec:
+#   tls:
+#     - hosts:
+#         - staging.lantan.property
+#       secretName: latan-key
+#   rules:
+#     - host: staging.lantan.property
+#       http:
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: lantanfrontendsvc
+#                 port:
+#                   number: 80
+#   ingressClassName: nginx
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: nginx-ingress-staging
+#   namespace: lantan
+#   annotations:
+#     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+#     kubernetes.io/ingress.class: "nginx"
+#     nginx.ingress.kubernetes.io/rewrite-target: /index.html
+# spec:
+#   tls:
+#     - hosts:
+#         - staging.lantan.property
+#       secretName: latan-key
+#   rules:
+#     - host: staging.lantan.property
+#       http:
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: lantanfrontendsvc
+#                 port:
+#                   number: 80
+#   ingressClassName: nginx

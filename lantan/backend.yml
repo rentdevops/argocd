@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lantanbackend
+  namespace: lantan
+spec:
+  selector:
+    matchLabels:
+      app: lantanbackend
+  template:
+    metadata:
+      labels:
+        app: lantanbackend
+    spec:
+      containers:
+        - name: lantan-backend
+          image: registry.digitalocean.com/lantan/lantan-backend:dev-320
+          envFrom:
+            - secretRef:
+                name: app-secrets
+          # envFrom:
+          #   - configMapRef:
+          #       name: lantan-.config
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - name: lantanbackend-storage
+              mountPath: /var/www/storage
+      volumes:
+        - name: lantanbackend-storage
+          persistentVolumeClaim:
+            claimName: lantanbackend-pvc
+
+      imagePullSecrets:
+        - name: do-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lantanbackendsvc
+  namespace: lantan
+spec:
+  selector:
+    app: lantanbackend
+  ports:
+    - port: 8000
+      targetPort: 8000
+
+
