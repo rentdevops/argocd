@@ -1,8 +1,8 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: lantan-cron
-  namespace: lantan
+  name: chat-cron
+  namespace: chatnode
 spec:
   # schedule: "0 0 2-5 * *" # Runs on day 2 to 5
   schedule: "* * * * *" # Runs everyday, every minute
