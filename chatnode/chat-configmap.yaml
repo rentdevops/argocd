@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lantan-env
+  namespace: lantan
+data:
+  .env: |
+    APP_NAME=Lantan
+    APP_ENV=staging
+    APP_KEY=${APP_KEY}
