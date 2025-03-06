@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: chatbackend
-  namespace: chatnode
+  namespace: recon
 spec:
   selector:
     matchLabels:
@@ -14,36 +14,19 @@ spec:
     spec:
       containers:
         - name: chat-backend
-          image: registry.digitalocean.com/lantan/lantan-backend:dev-320
-          envFrom:
-            - secretRef:
-                name: app-secrets
-          # envFrom:
-          #   - configMapRef:
-          #       name: chat-config
+          image: onyeechris/lantan-frontend:dev-82
           ports:
-            - containerPort: 8000
-      #     volumeMounts:
-      #       - name: chatbackend-storage
-      #         mountPath: /var/www/storage
-      # volumes:
-      #   - name: chatbackend-storage
-      #     persistentVolumeClaim:
-      #       claimName: chatbackend-pvc
+            - containerPort: 80
 
-      # imagePullSecrets:
-      #   - name: do-secret
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: chatbackendsvc
-  namespace: chatnode
+  namespace: recon
 spec:
   selector:
     app: chatbackend
   ports:
-    - port: 8000
-      targetPort: 8000
-
-
+    - port: 80
+      targetPort: 80
