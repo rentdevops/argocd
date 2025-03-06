@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: chatfrontend
-  namespace: chatnode
+  namespace: recon
 spec:
   selector:
     matchLabels:
@@ -14,25 +14,16 @@ spec:
     spec:
       containers:
         - name: chat-frontend
-          image: registry.digitalocean.com/lantan/lantan-frontend:dev-194
+          image: onyeechris/reconcile-frontend:dev-28
           ports:
             - containerPort: 80
-      #     env:
-      #       - name: REACT_APP_BASE_URL
-      #         valueFrom:
-      #           configMapKeyRef:
-      #             name: chat-config
-      #             key: REACT_APP_BASE_URL
-
-      # imagePullSecrets:
-      #   - name: do-secret  
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: chatfrontendsvc
-  namespace: lantan
+  namespace: recon
 spec:
   selector:
     app: chatfrontend
