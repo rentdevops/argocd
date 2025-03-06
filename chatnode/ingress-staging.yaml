@@ -1,31 +1,25 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx-ingress-chatnode
-  namespace: chatnode
+  name: my-app-ingress
+  namespace: recon
   annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
     kubernetes.io/ingress.class: "nginx"
-   
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "120"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "120"
 spec:
+  ingressClassName: nginx
+
   tls:
     - hosts:
-        - admin.hccloudtech.online
         - api.hccloudtech.online
-      secretName: chat-key
-  rules:
-    - host: api.hccloudtech.online
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: chatfrontendsvc
-                port:
-                  number: 80
+        - admin.hccloudtech.online
+      secretName: chatnode-key
 
+  rules:
     - host: api.hccloudtech.online
       http:
         paths:
@@ -36,4 +30,15 @@ spec:
                 name: chatbackendsvc
                 port:
                   number: 80
-  ingressClassName: nginx
+
+    - host: admin.hccloudtech.online
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: chatfrontendsvc
+                port:
+                  number: 80
+
