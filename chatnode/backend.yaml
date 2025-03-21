@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: chat-backend
-          image: chrystjr2/chatbackend:dev-14
+          image: chrystjr2/chatbackend:dev-15
           ports:
             - containerPort: 4000
 
