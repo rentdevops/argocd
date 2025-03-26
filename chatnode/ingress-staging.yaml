@@ -28,7 +28,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: reconbackendsvc
+                name: chatbackendsvc
                 port:
                   number: 80
 
@@ -39,6 +39,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: reconfrontendsvc
+                name: chatfrontendsvc
                 port:
                   number: 80
