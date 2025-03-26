@@ -2,14 +2,15 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: my-app-ingress
-  namespace: recon
+  namespace: chatnode
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/proxy-body-size: "50m"
-    nginx.ingress.kubernetes.io/proxy-connect-timeout: "120"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "120"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: nginx
 
@@ -17,7 +18,7 @@ spec:
     - hosts:
         - api.hccloudtech.online
         - admin.hccloudtech.online
-      secretName: chatnode-key
+      secretName: chatn-key
 
   rules:
     - host: api.hccloudtech.online
@@ -27,7 +28,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: chatbackendsvc
+                name: reconbackendsvc
                 port:
                   number: 80
 
@@ -38,7 +39,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: chatfrontendsvc
+                name: reconfrontendsvc
                 port:
                   number: 80
-
