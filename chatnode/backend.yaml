@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: chatbackend
-  namespace: recon
+  name: reconbackend
+  namespace: chatnode
 spec:
   selector:
     matchLabels:
@@ -17,13 +17,14 @@ spec:
           image: chrystjr2/chatbackend:dev-3
           ports:
             - containerPort: 4000
+          # env:
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: chatbackendsvc
-  namespace: recon
+  namespace: chatnode
 spec:
   selector:
     app: chatbackend
