@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: chat-frontend
-          image: chrystjr2/chatfrontend:dev-2
+          image: chrystjr2/chatfrontend:dev-5
           ports:
             - containerPort: 80
           # env:
