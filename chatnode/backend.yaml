@@ -13,7 +13,15 @@ spec:
         app: chatbackend
     spec:
       containers:
-        - name: chat-backend
+      - name: chat-backend
+        volumeMounts:
+        - name: cert-volume
+          mountPath: /app/global-bundle.pem
+          subPath: global-bundle.pem
+      volumes:
+      - name: cert-volume
+        configMap:
+          name: docdb-cert
           image: chrystjr2/chatbackend:dev-19
           ports:
             - containerPort: 4000
