@@ -1,39 +1,39 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: chatbackend
-#   namespace: chatnode
-# spec:
-#   selector:
-#     matchLabels:
-#       app: chatbackend
-#   template:
-#     metadata:
-#       labels:
-#         app: chatbackend
-#     spec:
-#       containers:
-#       - name: chat-backend
-#         image: chrystjr2/chatbackend:dev-19
-#         ports:
-#         - containerPort: 4000
-#         volumeMounts:
-#         - name: cert-volume
-#           mountPath: /app/global-bundle.pem
-#           subPath: global-bundle.pem
-#       volumes:
-#       - name: cert-volume
-#         configMap:
-#           name: docdb-cert
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: chatbackendsvc
-#   namespace: chatnode
-# spec:
-#   selector:
-#     app: chatbackend
-#   ports:
-#   - port: 80
-#     targetPort: 4000
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatbackend
+  namespace: chatnode
+spec:
+  selector:
+    matchLabels:
+      app: chatbackend
+  template:
+    metadata:
+      labels:
+        app: chatbackend
+    spec:
+      containers:
+      - name: chat-backend
+        image: chrystjr2/chatbackend:dev-19
+        ports:
+        - containerPort: 4000
+        volumeMounts:
+        - name: cert-volume
+          mountPath: /app/global-bundle.pem
+          subPath: global-bundle.pem
+      volumes:
+      - name: cert-volume
+        configMap:
+          name: docdb-cert
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chatbackendsvc
+  namespace: chatnode
+spec:
+  selector:
+    app: chatbackend
+  ports:
+  - port: 80
+    targetPort: 4000
