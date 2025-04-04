@@ -17,14 +17,14 @@ spec:
         image: chrystjr2/chatbackend:dev-34
         ports:
         - containerPort: 4000
-      #   volumeMounts:
-      #   - name: cert-volume
-      #     mountPath: /app/global-bundle.pem
-      #     subPath: global-bundle.pem
-      # volumes:
-      # - name: cert-volume
-      #   configMap:
-      #     name: docdb-cert
+        volumeMounts:
+        - name: cert-volume
+          mountPath: /app/global-bundle.pem
+          subPath: global-bundle.pem
+      volumes:
+      - name: cert-volume
+        configMap:
+          name: docdb-cert
 ---
 apiVersion: v1
 kind: Service
