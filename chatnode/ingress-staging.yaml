@@ -14,11 +14,11 @@ metadata:
 spec:
   ingressClassName: nginx
 
-  tls:
-    - hosts:
-        - api.hccloudtech.online
-        - admin.hccloudtech.online
-      secretName: chatn-key
+  # tls:
+  #   - hosts:
+  #       - api.hccloudtech.online
+  #       - admin.hccloudtech.online
+  #     secretName: chatn-key
 
   rules:
     - host: api.hccloudtech.online
