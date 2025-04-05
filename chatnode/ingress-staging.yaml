@@ -5,20 +5,16 @@ metadata:
   namespace: chatnode
   annotations:
     kubernetes.io/ingress.class: "nginx"
+    # Remove the rewrite-target which might be causing issues
     # nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/proxy-body-size: "50m"
-    nginx.ingress.kubernetes.io/proxy-connect-timeout: "350"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "350"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "350"
-    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    # Add this to disable buffering which can help with timeouts
+    nginx.ingress.kubernetes.io/proxy-buffering: "off"
 spec:
-
-  # tls:
-  #   - hosts:
-  #       - api.hccloudtech.online
-  #       - admin.hccloudtech.online
-  #     secretName: chatn-key
-
+  ingressClassName: nginx
   rules:
     - host: api.hccloudtech.online
       http:
@@ -30,7 +26,6 @@ spec:
                 name: chatbackendsvc
                 port:
                   number: 80
-
     - host: admin.hccloudtech.online
       http:
         paths:
@@ -41,3 +36,61 @@ spec:
                 name: chatfrontendsvc
                 port:
                   number: 80
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: my-app-ingress
+#   namespace: chatnode
+#   annotations:
+#     kubernetes.io/ingress.class: "nginx"
+#     # nginx.ingress.kubernetes.io/rewrite-target: /
+#     nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+#     nginx.ingress.kubernetes.io/proxy-connect-timeout: "350"
+#     nginx.ingress.kubernetes.io/proxy-read-timeout: "350"
+#     nginx.ingress.kubernetes.io/proxy-send-timeout: "350"
+#     # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+# spec:
+
+#   # tls:
+#   #   - hosts:
+#   #       - api.hccloudtech.online
+#   #       - admin.hccloudtech.online
+#   #     secretName: chatn-key
+
+#   rules:
+#     - host: api.hccloudtech.online
+#       http:
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: chatbackendsvc
+#                 port:
+#                   number: 80
+
+#     - host: admin.hccloudtech.online
+#       http:
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: chatfrontendsvc
+#                 port:
+#                   number: 80
