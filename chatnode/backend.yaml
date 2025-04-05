@@ -31,3 +31,16 @@ spec:
       - name: cert-volume
         configMap:
           name: docdb-cert
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chatbackendsvc
+  namespace: chatnode
+spec:
+  selector:
+    app: chatbackend
+  ports:
+  - port: 80
+    targetPort: 4000
