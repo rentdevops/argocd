@@ -1,14 +1,14 @@
-# apiVersion: cert-manager.io/v1
-# kind: Certificate
-# metadata:
-#   name: chatn-key
-#   namespace: chatnode
-# spec:
-#   secretName: chatn-key
-#   issuerRef:
-#     name: letsencrypt-prod
-#     kind: ClusterIssuer
-#   commonName: admin.hccloudtech.online
-#   dnsNames:
-#     - admin.hccloudtech.online
-#     - api.hccloudtech.online
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: chatn-key
+  namespace: chatnode
+spec:
+  secretName: chatn-key
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: admin.hccloudtech.online
+  dnsNames:
+    - admin.hccloudtech.online
+    - api.hccloudtech.online
