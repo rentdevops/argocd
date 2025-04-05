@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: chat-backend
-        image: chrystjr2/chatbackend:dev-42
+        image: chrystjr2/chatbackend:dev-43
         ports:
         - containerPort: 4000
         volumeMounts:
