@@ -29,7 +29,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: chatfrontendsvc
-  namespace: chatnode
+  namespace: awsdevops
 spec:
   selector:
     app: chatfrontend
