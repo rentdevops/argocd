@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: chatfrontend
-  namespace: chatnode
+  namespace: awsdevops
 spec:
   selector:
     matchLabels:
