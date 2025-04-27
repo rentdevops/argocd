@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatfrontend
+  namespace: chatnode
+spec:
+  selector:
+    matchLabels:
+      app: chatfrontend
+  template:
+    metadata:
+      labels:
+        app: chatfrontend
+    spec:
+      containers:
+        - name: chat-frontend
+          image: chrystjr2/chatfrontend:dev-9
+          ports:
+            - containerPort: 80
+          # env:
+          #   - name: REACT_APP_BASE_URL
+          #     valueFrom:
+          #       configMapKeyRef:
+          #         name: lantan-config
+          #         key: REACT_APP_BASE_URL
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chatfrontendsvc
+  namespace: chatnode
+spec:
+  selector:
+    app: chatfrontend
+  ports:
+    - port: 80
+      targetPort: 80
