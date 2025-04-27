@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatbackend
+  namespace: chatnode
+spec:
+  replicas: 1  # Explicitly set how many pods you want
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: chatbackend
+  template:
+    metadata:
+      labels:
+        app: chatbackend
+    spec:
+      containers:
+      - name: chat-backend
+        image: chrystjr2/chatbackend:dev-47
+        ports:
+        - containerPort: 4000
+        volumeMounts:
+        - name: cert-volume
+          mountPath: /app/global-bundle.pem
+          subPath: global-bundle.pem
+      volumes:
+      - name: cert-volume
+        configMap:
+          name: docdb-cert
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chatbackendsvc
+  namespace: chatnode
+spec:
+  selector:
+    app: chatbackend
+  ports:
+  - port: 80
+    targetPort: 4000
