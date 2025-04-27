@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: chatbackend
-  namespace: chatnode
+  namespace: awsdevops
 spec:
   replicas: 1  # Explicitly set how many pods you want
   strategy:
@@ -37,7 +37,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: chatbackendsvc
-  namespace: chatnode
+  namespace: awsdevops
 spec:
   selector:
     app: chatbackend
