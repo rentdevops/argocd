@@ -23,10 +23,10 @@ spec:
         image: chrystjr2/chatbackend:dev-53
         ports:
         - containerPort: 4000
-        volumeMounts:
-        - name: cert-volume
-          mountPath: /app/global-bundle.pem
-          subPath: global-bundle.pem
+        # volumeMounts:
+        # - name: cert-volume
+        #   mountPath: /app/global-bundle.pem
+        #   subPath: global-bundle.pem
       volumes:
       - name: cert-volume
         configMap:
