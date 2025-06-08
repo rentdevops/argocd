@@ -9,8 +9,8 @@ metadata:
 spec:
   # tls:
   #   - hosts:
-  #       - api.hccloudtech.online
-  #       - admin.hccloudtech.online
+  #       - apitest.hccloudtech.online
+  #       - testy.hccloudtech.online
   #     secretName: chatn-key
 
   rules:
