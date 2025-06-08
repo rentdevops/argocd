@@ -14,7 +14,7 @@ spec:
   #     secretName: chatn-key
 
   rules:
-    - host: api.hccloudtech.online
+    - host: apitest.hccloudtech.online
       http:
         paths:
           - path: /
@@ -25,7 +25,7 @@ spec:
                 port:
                   number: 80
 
-    - host: admin.hccloudtech.online
+    - host: testy.hccloudtech.online
       http:
         paths:
           - path: /
